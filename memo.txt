@@ -5,3 +5,6 @@
 発行所：京都大学学術出版会
 印刷・製本：（株）太洋社
 ２０１８年１２月２０日発行
+
+
+Robin Green, Spherical Harmonic Lighting: The Gritty Details

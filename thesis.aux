@@ -1,0 +1,96 @@
+\relax 
+\@writefile{toc}{\contentsline {section}{\numberline {1}序論}{1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}球MHDシミュレーション}{1}\protected@file@percent }
+\citation{プラズマ核融合シミュレーションの発展と将来への期待}
+\citation{woltjer1958theorem}
+\citation{taylor1974relaxation}
+\citation{コンピュータによる熱移動と流れの数値解析}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}緩和現象}{2}\protected@file@percent }
+\citation{宇宙流体力学}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}磁気流体力学とMHD方程式}{3}\protected@file@percent }
+\citation{taylor1974relaxation}
+\citation{MagnetohydrodynamicsOfPlasmaRelaxation}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}Taylor理論}{4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.5}先行研究}{4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Troidal magnetic field in Yamamoto's simulation.}}{5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Relaxed magnetic field in Yamamoto's simulation.}}{5}\protected@file@percent }
+\newlabel{fig:Mag2}{{2}{5}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}球の数値計算手法}{5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}時間積分法}{6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}空間離散化手法}{7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}球座標格子の問題点}{7}\protected@file@percent }
+\citation{hayashi2016yin}
+\citation{kageyama2004yin}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Spherical polar coordinates. Grid points concentrated around the poles and the origin.}}{9}\protected@file@percent }
+\newlabel{fig:grid}{{3}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Yin--Yang 格子の利点と Zhong 格子の導入}{9}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Construction of Yin-Yang-Zhong grid.}}{11}\protected@file@percent }
+\newlabel{fig:YYZthesis}{{4}{11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Yin--Yang--Zhong 格子の座標変換}{11}\protected@file@percent }
+\newlabel{Yin-ortho}{{29}{11}}
+\newlabel{Yang-ortho}{{30}{12}}
+\newlabel{Yin-Yang-matrix}{{31}{12}}
+\newlabel{matrix}{{32}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Yin--Yang--Zhong格子のベクトル変換と補間}{12}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Vector components of Yin and Yang.}}{15}\protected@file@percent }
+\newlabel{fig:sphericalNormalVectors}{{5}{15}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Fortranプリプロセッサの開発}{15}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}現代的Fortranの問題点}{15}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces There is no block commets in standard Fortran.}}{16}\protected@file@percent }
+\newlabel{block-comment1}{{6}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}eFortranとefpp}{16}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Conversion from eFortran to Fortran by preprocesser.}}{17}\protected@file@percent }
+\newlabel{conversion}{{7}{17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}具体例}{17}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}ブロックコメント}{17}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Syntax of block comment. Sandwiched by a pair of "=" sequence in eFortran.}}{18}\protected@file@percent }
+\newlabel{block-comment2}{{8}{18}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces A block of comment can contain another block of comment inside it.}}{18}\protected@file@percent }
+\newlabel{block-comment3}{{9}{18}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}変数定義の簡略化}{18}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces In standard Fortran, declarations to be long lines (top). But in eFortran, it can be write simply (bottom).}}{19}\protected@file@percent }
+\newlabel{declarations}{{10}{19}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}マクロ定義}{19}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces String substitution in source code}}{20}\protected@file@percent }
+\newlabel{macros}{{11}{20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}サンプルコード}{21}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Sample eFortran code.}}{21}\protected@file@percent }
+\newlabel{sample_e03}{{12}{21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Standard Fortran code converted from eFortran}}{22}\protected@file@percent }
+\newlabel{sample_f90}{{13}{22}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}計算モデルとコードの実装}{22}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}計算手法}{22}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}初期条件}{23}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}圧力・質量密度}{23}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}球面調和関数}{23}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Associated Legendre polynomials (left), and spherical harmonics (right).}}{24}\protected@file@percent }
+\newlabel{spherical}{{1}{24}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Initial magnetic field in $(l,m)=(3,1)$(left), $(3,2)$(middle), $(3,3)$(right). }}{25}\protected@file@percent }
+\newlabel{initialMag1}{{14}{25}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}境界条件}{25}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}パラメータ設定}{25}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}eFortran版球MHDコードの概観}{26}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}シミュレーション結果}{27}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}エネルギーのグラフ}{27}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Relaxation of total magnetic(purple line) and flow(green line) energy in $(l,m)=(3,1)$.}}{27}\protected@file@percent }
+\newlabel{L3M1_graph}{{15}{27}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Relaxation of total magnetic(purple line) and flow(green line) energy in $(l,m)=(3,2)$.}}{28}\protected@file@percent }
+\newlabel{L3M2_graph}{{16}{28}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Relaxation of total magnetic(perple line) and flow(green line) energy in $(l,m)=(3,3)$.}}{28}\protected@file@percent }
+\newlabel{L3M3_graph}{{17}{28}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}緩和状態の三次元構造}{29}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Stream tracer of relaxed magnetic field(left), and flow(right) in $(l,m)=(3,1)$.}}{29}\protected@file@percent }
+\newlabel{L3M1_relaxed}{{18}{29}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Stream tracer of relaxed magnetic field(left), and flow(right) in $(l,m)=(3,2)$.}}{30}\protected@file@percent }
+\newlabel{L3M2_relaxed}{{19}{30}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Stream tracer of relaxed magnetic field(left), and flow(right) in $(l,m)=(3,3)$.}}{30}\protected@file@percent }
+\newlabel{L3M3_relaxed}{{20}{30}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}$(l,m)=(3,3)$のときの緩和状態}{31}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Equator plane(top), and meridian plane(bottom) of stream tracer: relaxed magnetic field(left) and flow(right) in $(l,m)=(3,3)$.}}{31}\protected@file@percent }
+\newlabel{clip_L3M3_xy}{{21}{31}}
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces 3D Structure of relaxed magnetic field(red), and flow(blue) in $(l,m)=(3,3)$.}}{32}\protected@file@percent }
+\newlabel{L3M3_cartoon}{{22}{32}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}結論}{33}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{謝辞}{33}\protected@file@percent }
+\bibstyle{junsrt}
+\bibdata{bibtex.bib}
