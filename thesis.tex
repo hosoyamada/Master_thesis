@@ -37,6 +37,19 @@
 %\Large{2018年2月5日}
 %\end{center}
 
+\newpage
+\thispagestyle{empty}
+\begin{center}
+\Large{\underline{MHD dynamo driven by precession in sphere}}\\
+\vspace{1.5cm}
+\large{Shin'ya Hosoyamada}\\
+\end{center}
+\vspace{1cm}
+\section*{Abstract}
+% 英語要旨
+Relaxation, the system of transitions from a high energy state to a low state energy, is an interesting thing that is seen in various physical systems. It can be apply to a model of magnetohydrodynamics (MagnetoHydroDynamics, MHD). For MHD fluid, a relaxation theory called Taylor theory has been established, but Taylor theory assumes that only magnetic energy exists in the relaxed state and that the kinetic energy of the fluid can be ignored. This theory is not generally applicable to natural phenomena in MHD systems because there are relaxation states with flows. The ultimate goal of this study is to extend the classical Taylor theory and construct the MHD relaxation theory that describes the relaxation state with not only magnetic energy but also flow energy. In this study, I searched a behavior of MHD fluid in a spherical vessel by the computer simulation. The calculation model is as follows: the MHD fluid is filled in a sphere region, its radius is 1, and an initial magnetic field represented by a spherical harmonic is given. The boundary conditions were assumed to be a perfect conductor boundary (for the magnetic field), a rigid body boundary (for the flow field), and an adiabatic boundary (for the temperature field). A Yin--Yang--Zhong grid was used as a discretization method to solve the grid concentration problem, which is occurred in the global spherical simulation. I developed a Fortran preprocessor, efpp, for efficient coding in simulation. As a result of the simulation, the relaxation structure peculiar to the spherical harmonics was found.
+
+
 % 日本語要旨
 \newpage
 \thispagestyle{empty}
@@ -49,7 +62,7 @@
 \vspace{1cm}
 %=============================================
 \section*{要旨}
-エネルギーが高い状態から低い状態に系が自発的に遷移する現象、緩和は様々な物理系で見られる興味深い現象である。それは磁気流体力学（MagnetoHydroDynamics, MHD）のモデルにおいても例外ではない。MHD流体の緩和についてはTaylor理論と呼ばれる緩和理論が確立されているが、Taylor理論では緩和状態において磁気エネルギーだけが存在し、流体の運動エネルギーは無視できると仮定している。MHD系の自然現象では流れを持つ緩和状態が存在するので、この理論は一般的に適応されない。本研究の最終的な目的は、古典的なTaylor理論を拡張し、磁気エネルギーだけでなく流れのエネルギーを持つ緩和状態を説明するMHD緩和理論を構成することである。本研究では球状容器内のMHD流体の振る舞いについて計算機シミュレーションを行った。計算モデルは以下の通りである。半径1の球面に囲まれた球領域にMHD流体が満たされているとし、球面調和関数で表される初期磁場を与える。境界条件は磁場については完全導体境界、流れ場については剛体境界、温度場については断熱境界を仮定した。全球でシミュレーションを行う際に問題となる格子点集中問題を解決するための離散化手法としてYin--Yang--Zhong格子を用いた。またシミュレーションコード実装を効率的に行うためにFortranプリプロセッサefppを開発した。シミュレーションの結果、球面調和関数特有の緩和構造を発見することができた。
+エネルギーが高い状態から低い状態に系が自発的に遷移する現象、つまり緩和は様々な物理系で見られる興味深い現象である。それは磁気流体力学（MagnetoHydro Dynamics, MHD）のモデルにおいても例外ではない。MHD流体の緩和についてはTaylor理論と呼ばれる緩和理論が確立されているが、この理論では緩和状態において磁気エネルギーだけが存在し、流体の運動エネルギーは無視される。一般的なMHD系のエネルギー緩和現象では流れを持つ緩和状態の方がむしろ普通なので、Taylor理論の適用範囲は狭すぎる。本研究の最終的な目的は、古典的なTaylor理論を拡張し磁気エネルギーだけでなく流れのエネルギーを持つ緩和状態を説明するMHD緩和理論を構成することである。この目標を目指して、本研究では球状容器内のMHD流体の振る舞いについて計算機シミュレーションを行った。計算モデルは以下の通りである。半径1の球面に囲まれた球領域にMHD流体が満たされているとし、解析的に定義した単純な構造を持つ初期磁場を与える。初期の流れ場はないものとする。シミュレーションを開始すると初期磁場のエネルギーが解放され、流れが駆動される。そしてしばらく計算を続けると流れと磁場が共存する緩和状態が得られる。全球でシミュレーションを行う際に問題となる格子点集中問題を解決するための離散化手法としてYin--Yang--Zhong格子を用いた。またシミュレーションコード実装を効率的に行うためにFortranプリプロセッサを開発した。シミュレーションの結果、いくつかの興味深い緩和構造を見い出した。
 %=============================================
 
 
@@ -65,35 +78,32 @@
 \section{序論}
 %=============================================
 \subsection{球MHDシミュレーション}
-シミュレーションとは現実上で行われる実験をコンピュータ上で疑似的に行うことである。その利点は低コストであること、安全であることなどが挙げられ、今や理論・実験科学に続く「第３の科学」として多くの学術・応用分野で必要不可欠な研究手法として位置づけられている[プラズマシミュレーション]。本研究で扱うシミュレーションは球状容器中のMHD流体の振る舞いについてである。MHD流体とは磁気流体力学（MagnetoHydroDynamics）方程式に従う流体のことで、別名を電気伝導性流体という。例えば、プラズマはMHD流体の代表格である。プラズマは、固体、液体、気体に続く第４の物質状態と呼ばれ、地上で意識することは少ないが、宇宙や天体で物質のとる普遍的な状態である[プラズマシミュレーション]。また、液体鉄もMHD流体の一つである。地球内部の大部分を占めるマントル層の下には外核と呼ばれる液体鉄の領域があるが、その流れによって地球の磁場が形成・維持されていると考えられている[地球ダイナモ研究のこれまでとこれから]。
+計算機シミュレーションは数値実験とも呼ばれ、現象を支配する基本方程式がすでにわかっている場合、実際に装置を使った実験を行う代わりに計算機の中で行う仮想的な実験のことである。技術的あるいはコスト的に現実には実現不可能な実験を行うことができるのが計算機シミュレーションの特徴であり、理論科学、実験科学に続く「第３の科学」として多くの様々な研究開発分野で必要不可欠な研究手法となっている\cite{プラズマシミュレーション}。
 
-つまり、MHD流体のシミュレーションを扱うことによって、将来的にMHD流体そのものだけでなく地球やその他天体の振る舞いが理解できるようになり、宇宙に関する多くの謎が解明される可能性がある。球を想定している理由は、天体の多くは球状であるから、また角運動量が保存する、境界に流れが妨げられないなど球体ならではの特徴があるからである。
+本研究では球状の容器内部のMHD流体のエネルギー緩和現象について計算機シミュレーションを行う（これも現実で実行するには難しい実験であるので計算機シミュレーションを行うほうが望ましい）。MHD流体とはプラズマや液体金属などの電気伝導性の流体のことである。MHD流体の運動はMHD方程式で記述される太陽の水素プラズマや地球外殻の液体鉄\cite{地球ダイナモ研究のこれまでとこれから}は同じMHD方程式に従う。従ってMHD流体の物理を理解することは地球や太陽のダイナミクスを理解するために不可欠である。
 
-数値シミュレーションに必要な材料は以下の通りである。
-\begin{enumerate}
-  \renewcommand{\labelenumi}{(\arabic{enumi})}
-  \item 対象にする問題
-  \item 問題が従う微分方程式
-  \item 微分方程式の時間微分および空間微分を離散的に近似する手法
-\end{enumerate}
-(1)本研究が対象にする問題はMHD流体の基礎的な性質とは何か、特にMHD流体の緩和現象（1.2参照）に見られる特徴は何かということである。そして、(2)MHD流体が従う方程式はMHD方程式（1.3参照）であり、(3)その方程式の時間微分と空間微分を離散的に近似する手法はそれぞれ４次ルンゲ・クッタ法（2.1参照）と有限差分法(2.2参照)を用いた。
+MHDの基礎過程の一つとしてエネルギー緩和がある。エネルギー緩和とはMHD流体の系がエネルギーを解放し、よりエネルギーの低い安定な状態に移ることである。MHDのエネルギー緩和の詳細については次の節で述べる。MHDの基礎物理過程の中でも特に流れを伴った緩和現象は未解明な点が数多く残されている。流れを伴ったエネルギー緩和状態とは余分に緩和した状態において、磁場だけでなく流れもエネルギーを持っている状態である。このように流れが維持されている状態を研究するためには境界から外力を受けることのない形状、すなわち球で研究することが重要である。
+
+
+数値シミュレーションでは多くの場合、対象とする現象は微分方程式で記述される、MHD流体のエネルギー緩和現象に関しては上に述べたようにその基本方程式はMHD方程式である。MHD方程式については 1.3章で述べる。また、微分方程式に基づいた現象を計算機シミュレーションで解く場合、空間離散化と時間積分の手法の選択がシミュレーションの精度と速度を決める。本研究で採用したのは有限差分法とルンゲ・クッタ法である。それぞれの詳細についは２章で述べる。
+
 
 \subsection{緩和現象}
 緩和(relaxation)とは一般的に系が不安定な状態から安定な状態に移り変わることを言う。散逸を持つ系が閉じている(=系が外部とエネルギーや物質を交換しない)場合、その系は最終的に熱力学的な平衡状態となるが、そこに至るには散逸時間程度の時間がかかる。そして多くの場合、その散逸時間のスケールは系に存在する他の時間スケールと比べて極めて大きい。つまり、ある系が完全に緩和するには時間がかかるのが一般的である。しかし、多くの物理系で散逸時間よりも短い時間スケールで系がほぼ定常状態に落ち着く現象が観察されている。それは完全な定常状態ではないが、散逸時間程度の時間スケールで維持される準定常状態である。そのような物理系は、どのような初期状態から出発しても数少ない特定の準定常状態に落ち着く。そしてこの状態は何らかの特徴的な構造を持っている場合が多い。
 
-プラズマの系においても例外でなく、自然界や実験室でこの緩和現象が確認され、多くの研究者を惹きつけてきた。この緩和は2次元系でも起き得るが、本質的で興味深い点はその3次元性にある。スーパーコンピュータ(スパコン)が登場した80年代半ばより、3次元磁気流体モデルを用いた緩和のシミュレーション研究がようやく可能になった。当初は50×50×50程度の空間メッシュを用いた計算が限度であったが、その後のスパコンの能力の飛躍的増加により、現在では1次元方向に1,000メッシュ以上をもつ3次元計算が可能となっている。これまでに、様々な系で発生するプラズマの緩和現象が計算機シミュレーションにより解明されてきている\cite{プラズマ核融合シミュレーションの発展と将来への期待}。
+プラズマの系においても例外でなく、自然界や実験室でこの緩和現象が確認され、多くの研究者を惹きつけてきた。この緩和は2次元系でも起き得るが、本質的で興味深い点はその3次元系にある。スーパーコンピュータ(スパコン)が登場した80年代半ばより、3次元磁気流体モデルを用いた緩和のシミュレーション研究がようやく可能になった。当初は50×50×50程度の空間メッシュを用いた計算が限度であったが、その後のスパコンの能力の飛躍的増加により、現在では1次元方向に1,000メッシュ以上をもつ3次元計算が可能となっている。これまでに、様々な系で発生するプラズマの緩和現象が計算機シミュレーションにより解明されてきている\cite{プラズマ核融合シミュレーションの発展と将来への期待}。
 
-磁気流体力学(Magnetohydorodynamics,MHD)モデルに基づくプラズマの緩和理論はWoltjer \cite{woltjer1958theorem}とTaylor \cite{taylor1974relaxation}によって主に構築された。MHDモデルでは、磁気エネルギー、運動エネルギー、熱エネルギーの3つのエネルギーが存在する。Woltjer--Taylor理論ではこのうち磁気エネルギーだけに注目しその緩和状態を考えている。運動エネルギーは無視する、すなわち緩和状態でプラズマの流れは止まっているという仮説はTaylorが想定していたプラズマの閉じ込めを目的とした核融合の実験装置では妥当なものであるが、全てのプラズマ（あるいはMHD）系で成り立つわけではない。むしろ、緩和状態でも流れが生じているほうが自然界的に一般的である。そこで本研究では、流れの運動エネルギーを含むMHD流体の動きを計算機シミュレーション\cite{コンピュータによる熱移動と流れの数値解析}で調べることによって、より詳細なMHD流体の緩和理論を発展させることを目標とする。
+磁気流体力学モデルに基づくプラズマの緩和理論はWoltjer \cite{woltjer1958theorem}とTaylor \cite{taylor1974relaxation}によって主に構築された。MHDモデルでは、磁気エネルギー、運動エネルギー、熱エネルギーの3つのエネルギーが存在する。Woltjer--Taylor理論ではこのうち磁気エネルギーだけに注目しその緩和状態を考えているので、運動エネルギーは無視する、すなわち緩和状態でプラズマの流れは止まっているとする。Taylorが想定していたプラズマの閉じ込めを目的とした核融合の実験装置では、この過程は妥当なものであるが、全てのプラズマ（あるいはMHD）系で成り立つわけではない。むしろ、緩和状態でも流れが生じているほうが自然界では一般的である。そこで本研究では、流れの運動エネルギーを含むMHD流体の動きを計算機シミュレーションで調べることによって、より詳細なMHD流体の緩和理論を発展させることを目標とする。
 
 %\pagebreak
 
 \subsection{磁気流体力学とMHD方程式}
 ここでは本研究で扱われる方程式、MHD方程式について説明する。
 
-MHD方程式とはMHD流体の振る舞いを表した式のことで、圧縮性の磁気流体の運動は以下のMHD方程式で記述される\cite{宇宙流体力学}。
+MHD方程式とは電気伝導性流体の流れと磁場の時間発展を記述する方程式である。圧縮性の磁気流体の運動は以下のMHD方程式で記述される\cite{宇宙流体力学}。
 \begin{eqnarray}
 \frac{\partial \rho}{\partial t}&=&-\nabla \cdot \bm{f} , \\
-\frac{\partial \bm{f}}{\partial t}&=&-\nabla \cdot (\bm{v}\bm{f})-\nabla p+\bm{j}\times\bm{b}+\mu\left[\nabla^2\bm{v}+\frac{1}{3}\nabla(\nabla\cdot\bm{v})\right]+2\bm{f}\times\bm{\Omega}, \\
+\frac{\partial \bm{f}}{\partial t}&=&-\nabla \cdot (\bm{v}\bm{f})-\nabla p+\bm{j}\times\bm{b}+\mu\left[\nabla^2\bm{v}+\frac{1}{3}\nabla(\nabla\cdot\bm{v})\right], \\
 \frac{\partial p}{\partial t}&=&-\bm{v}\cdot\nabla p - \gamma p \nabla\cdot \bm{v} + (\gamma-1)\left[\kappa\nabla^2 T +\eta\bm{j}^2 + \Phi\right], \\
 \frac{\partial \bm{a}}{\partial t}&=&\bm{v}\times\bm{b}+\eta\nabla^2\bm{a} +\nabla(\phi-\eta\nabla\cdot\bm{a}), 
 \end{eqnarray}
@@ -101,16 +111,16 @@ MHD方程式とはMHD流体の振る舞いを表した式のことで、圧縮�
 \begin{eqnarray}
 \bm{f}&=&\rho\bm{v},\\
 p&=&C_v(\gamma-1)\rho T,\\
-\mu_0\bm{j}&=&\nabla\times\bm{b},\\
+\mu_0\bm{j}&=&\nabla\times\bm{b},\\ \label{function1}
 \bm{b}&=&\nabla\times\bm{a},\\
 \Phi&=&2\mu\left[\epsilon_{ij}\epsilon_{ij}-\frac{1}{3}(\nabla\cdot\bm{v})\right],\\
 \epsilon_{ij}&=&\frac{1}{2}\left[\frac{\partial v_i}{\partial x_j} + \frac{\partial v_j}{\partial x_i}\right],
 \end{eqnarray}
 である。
 
-$\rho$は質量密度、$\bm{f}$は質量流束、$p$は圧力、$\bm{a}$は磁場のベクトルポテンシャル、$\bm{v}$は速度場、$\bm{b}$は磁場、$\bm{j}$は電流密度、$T$は温度、$\gamma$は比熱比、$C_v$は定積比熱、$\Omega$は角運動量、$\mu$は粘性係数、$\eta$は電気抵抗、$\kappa$は熱伝導率、$\Phi$は散逸関数、$\phi$は任意のスカラー場である。本研究では$\phi=\eta\nabla\cdot\bm{a}$というゲージを用いた。
+$\rho$は質量密度、$\bm{f}$は質量流束、$p$は圧力、$\bm{a}$は磁場のベクトルポテンシャル、$\bm{v}$は速度場、$\bm{b}$は磁場、$\bm{j}$は電流密度、$T$は温度、$\gamma$は比熱比、$C_v$は定積比熱、$\mu$は粘性係数、$\eta$は電気抵抗、$\kappa$は熱伝導率、$\Phi$は散逸関数、$\phi$は任意のスカラー場である。本研究では$\phi=\eta\nabla\cdot\bm{a}$というゲージを用いた。
 
-式(1)は質量保存則、式(2)は運動方程式、式(3)は圧力の式、式(4)は磁場の誘導方程式を表している。
+式(1)は質量保存則、式(2)は運動方程式、式(3)は圧力の式、式(4)は磁場の誘導方程式と呼ばれる。
 
 
 %ここで、磁気流体が閉じ込められた球領域内部において全角運動量が保存することを証明する。
@@ -138,10 +148,10 @@ K=\int \bm{a}\cdot\bm{b}\;\mathrm{d}V
 W_m=\int \frac{b^2}{2}\;\mathrm{d}V
 \end{equation}
 が最小となる場合、
-\begin{equation}
+\begin{equation} \label{function2}
 \nabla\times\bm{b}= \mu\bm{b}
 \end{equation}
-を満たすことを示した\cite{taylor1974relaxation}\cite{MagnetohydrodynamicsOfPlasmaRelaxation}。このとき式(26)、式(7)より磁場中に働くローレンツ力$\bm{j}\times\bm{b}$は
+を満たすことを示した\cite{taylor1974relaxation}\cite{ortolani1993magnetohydrodynamics}。ここで$\mu$は定数である。このとき式(\ref{function1})、式(\ref{function2})より磁場中に働くローレンツ力$\bm{j}\times\bm{b}$は
 \begin{equation}
 \bm{j}\times\bm{b}= \frac{\mu}{\mu_0}\bm{b}\times\bm{b}=\bm{0}
 \end{equation}
@@ -181,22 +191,23 @@ W_m=\int \frac{b^2}{2}\;\mathrm{d}V
 
 \subsection{先行研究}
 %先研 
-本研究の先行研究として、初期磁場がトロイダル磁場（Fig.)の時の緩和状態を本研究室の山本らが調べた。その結果は以下の通りである。
+本研究の先行研究として、初期磁場がトロイダル磁場（Fig.\ref{Mag1})の時の緩和状態を本研究室の山本らが調べた。その結果は以下の通りである。
 \begin{itemize}
 \item 初期流れの有無に関わらず、磁気エネルギーの緩和過程において磁気ヘリシティがほぼ保存される。
 \item 初期状態に剛体回転流れを与えた場合には、運動エネルギーが磁気エネルギーに変換されるダイナモ効果がみられ、初期速度場がゼロの場合と比べて緩和状態での磁気エネルギーが高くなった。
-\item 初期速度場がゼロの場合においては、緩和状態に正方形の各頂点に渦ができるという特徴的な構造が見られた。
+\item 初期速度場がゼロの場合においては、緩和状態に正方形の各頂点に渦ができるという特徴的な構造が見られた(Fig.\ref{Mag2})。
 \end{itemize}
-本研究と先行研究との大きな違いは初期磁場である。
+
+本研究と先行研究との大きな違いは初期磁場の構造である。
 先行研究ではリング磁場を用いていたが、本研究では球面調和関数を用いた。
-その理由はリング磁場は構造が単純であるが、時間経過で生じる流れが速く、シミュレーションの発散の原因となるためである。球面調和関数を用いてリングを複数個用意するとその構造は複雑になるものの、長期的なシミュレーションが可能となる。
+その理由はリング磁場は構造が単純であるが時間経過で生じる流れが速く、シミュレーションの発散の原因となるためである。球面調和関数を用いて磁力線のリングを複数個用意するとその構造は複雑になるものの、長期的なシミュレーションが可能となる。
  
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.3\textheight,width=0.6\hsize,angle=0,keepaspectratio]{./Image/init_mag_12.png}
-\caption{Troidal magnetic field in Yamamoto's simulation.}
+\caption{Troidal magnetic field in Yamamoto's simulation.}\label{Mag1}
 \includegraphics[height=0.3\textheight,width=0.6\hsize,angle=0,keepaspectratio]{./Image/Yamamoto_relaxation.png}
-\caption{Relaxed magnetic field in Yamamoto's simulation.}\label{fig:Mag2}
+\caption{Relaxed magnetic field in Yamamoto's simulation.}\label{Mag2}
 \end{figure}
  
  
@@ -206,20 +217,20 @@ W_m=\int \frac{b^2}{2}\;\mathrm{d}V
 本研究は球体のシミュレーションを対象としているので、球ジオメトリの計算手法が必要不可欠である。この章では球の数値計算手法と本研究に用いられる座標格子「Yin--Yang--Zhong 格子」について説明する。
 %=============================================
 \subsection{時間積分法}
-メモリーが有限であるコンピュータでは連続的な微分方程式を解くことができないので、微分方程式を離散化して近似する必要がある。そのうち時間微分を近似する代表的な手法に１次オイラー法と４次ルンゲ・クッタ法がある。以下よりそれぞれについて説明する。
+微分方程式を離散化して解く手法は数多く考案されている\cite{理工学のための数値計算法}。その中でも本研究では時間積分には４次のルンゲ・クッタ法を、空間微分には有限差分法を採用した。以下ではまず４次ルンゲ・クッタ法について説明する。
 
-まず解きたい微分方程式が以下のように表せるとする。
-\begin{equation}
+時間積分法の基本的なものに前進オイラー法がある。解きたい微分方程式が以下のように表せるとする。
+\begin{equation} \label{function}
 \frac{dq(t)}{dt} = f(q,t) 
 \end{equation}
-ここで時間を以下のように離散化させる。
+ここで時間を$t$、物理量を$q$とする。次にそれぞれを以下のように離散化する。
 \begin{eqnarray}
 t_j &=& \Delta t \times j      \\
 q_j &=& q(t_j)      \\
 f_j &=& f(q_j,t_j)     
 \end{eqnarray}
-$j$は0以上の整数である。
-１次オイラー法は（）式を以下のように近似する方法である。
+$j$は0以上の整数とする。
+前進オイラー法は（\ref{function}）式を以下のように近似する方法である。
 \begin{equation}
 \frac{q_{j+1}-q_j}{\Delta t} = f_j 
 \end{equation}
@@ -227,8 +238,7 @@ $j$は0以上の整数である。
 \begin{equation}
 q_{j+1} = q_j + \Delta t \times  f_j 
 \end{equation}
-となる。
-また４次ルンゲ・クッタ法は（）式を以下のように近似する。
+となる。前進オイラー法は微分方程式の最も簡単な近似解法である。「前進」というのは、前に進んだ$t_{j+1}$と$t_j$における$q$ の値を用いて近似を行なっているからである。一方４次ルンゲ・クッタ法は（\ref{function}）式を以下のように近似する。
 \begin{eqnarray}
 q_{j+1} &=& q_j + \frac{\Delta t}{6}k_1 + \frac{\Delta t}{3}k_2 + \frac{\Delta t}{3}k_3 + \frac{\Delta t}{6}k_4 \\
 k_1 &=& f(q_j,t_j)  \\
@@ -236,11 +246,10 @@ k_2 &=& f(q_j+\frac{\Delta t}{2}k_1,t_j+\frac{\Delta t}{2})  \\
 k_3 &=& f(q_j+\frac{\Delta t}{2}k_2,t_j+\frac{\Delta t}{2})  \\
 k_4 &=& f(q_j+\Delta tk_3,t_j+\Delta t)
 \end{eqnarray}
-１次オイラー法は単純だが１次精度$\mathcal{O} \left( \Delta t \right)$なので誤差が大きくなる。それに対し４次ルンゲ・クッタ法は４次精度$\mathcal{O} \left( \Delta t^4 \right)$なので十分に高い。４次ルンゲ・クッタ法の問題点は計算量やメモリ量が多くなることだが、それらを削減する高速４次ルンゲ・クッタ法（ルンゲ・クッタ・ギル法など）のアルゴリズムが考案されているので大きな問題にならない。よって本研究では４次ルンゲ・クッタ法を用いることにする。
-
+前進オイラー法は単純だがその精度は１次$\mathcal{O} \left( \Delta t \right)$である。それに対し４次ルンゲ・クッタ法は４次精度$\mathcal{O} \left( \Delta t^4 \right)$なので十分に高い。上に述べた古典的４次ルンゲ・クッタ法の問題点は必要なメモリ量が多くなることだが、それらを削減する手法（ルンゲ・クッタ・ギル法など）が考案されている。本研究では古典的な４次ルンゲ・クッタ法を用いる。
 
 \subsection{空間離散化手法}
-球内部の三次元空間を離散化する方法は大きく分けて２つある。１つは球面調和関数（4.2.2参照）などを用いて離散的に式を展開するスペクトル法、もう１つは空間を有限個の格子（グリッド）で分割する有限差分法である。流体のシミュレーションはスペクトル法を用いた研究が盛んである[]。なぜなら、スペクトル法は球ジオメトリへの適応が容易であり、比較的少ない展開モード数だと高い精度の解が得られるからである。しかし、球面調和関数を用いたスペクトル法には以下の２つの問題点がある：
+ここでは本研究が空間微分の数値解法として用いた有限差分法を関数展開法と比べて説明する。有限差分法とは空間を有限個の格子（グリッド）で分割する方法を指し、関数展開法とは球面調和関数（4.2.2参照）などの展開用の関数を用いて離散的に式を展開する方法（スペクトル法とも呼ばれる）を指す。流体のシミュレーションは関数展開法を用いた研究が盛んである\cite{mininni2006magnetohydrodynamic}。なぜなら、関数展開法は球ジオメトリへの適応が容易であり、比較的少ない展開モード数でも高い精度の解が得られるからである。しかし、球面調和関数を用いた関数展開法には以下の２つの問題点がある：
 
 \begin{enumerate}
   \renewcommand{\labelenumi}{(\arabic{enumi})}
@@ -250,46 +259,46 @@ k_4 &=& f(q_j+\Delta tk_3,t_j+\Delta t)
 
 有限差分法は上記２つの問題点を解消することができる。
 例えば、(1)に関して系の自由度を$L,M$とすると有限差分法の計算量は$\mathcal{O} \left( L M \right)$と表されるので、指数関数的に計算量が増えることはない。
-また(2)に関して陽的な（未知の変数を既知の変数のみで求められることを陽的という）時間積分法を採用する限り、グリッドベースの方法が並列計算に適していることはよく知られている。
+また(2)に関して陽的な（未知の変数を既知の変数のみで直接求められる解法を陽解法という\cite{理工学のための数値計算法}）時間積分法を採用する限り、グリッドベースの方法が並列計算に適していることはよく知られている。
 
 よって有限差分法を用いてシミュレーションを行いたいのだが、有限差分法を球ジオメトリに適応させるには計算上の問題がある。次節では球座標格子の問題点について説明する。
 
 \subsection{球座標格子の問題点}
-従来において、球殻系の流体シミュレーションには球座標格子($r$,$\theta$,$\phi$)が広く使われてきた。ここで$r$は原点からの距離(半径)、$\theta$は余緯度、$\phi$は経度である。球座標格子の低緯度表面付近は格子間隔がほぼ均一であり理想的なシミュレーション格子といえる。しかし、球座標格子には以下の２つの特異点がある[Fig.\ref{fig:grid}]。
+従来、球ジオメトリの流体シミュレーションには球座標格子($r$,$\theta$,$\phi$)が広く使われてきた\cite{yoshimura1975model}\cite{chen2014global}。ここで$r$は原点からの距離(半径)、$\theta$は余緯度、$\phi$は経度である。球座標格子の低緯度表面付近は格子間隔がほぼ均一であり理想的なシミュレーション格子といえる。しかし、球座標格子には以下の２つの特異点がある[Fig.\ref{fig:grid}]：
 \begin{description}
 \item{(1)}極($\theta$ = 0,$\pi$)
 \item{(2)}球の中心($r = 0$)
 \end{description}
-これらの特異点によって、シミュレーションにおいて２つの問題が生じる。
+これらの特異点によって、シミュレーションにおいて２つの問題が生じる：
 \begin{description}
 \item{(1)}特異点でのゼロ除算の問題
 \item{(2)}特異点に格子が集中していることによる計算コストの増加
 \end{description}
 
-(1)の問題については、シミュレーションにおいて座標特異点上に格子点を置く必要はなく、ずらして置くことが可能なので回避することができる。またロピタルの定理を利用し方程式を特異的でない形にして解くという方法もある。(1)の問題よりむしろ(2)の格子点が集中している問題のほうが深刻である。その理由について以下より説明する。
+(1)の問題については、シミュレーションにおいて座標特異点上に格子点を置く必要はなく、ずらして置くことが可能なので回避することができる\cite{kageyama1993simulation}。またロピタルの定理を利用し方程式を特異的でない形にして解くという方法もある\cite{kageyama1993simulation}。(1)の問題よりむしろ(2)の格子点が集中している問題のほうが深刻である。その理由について以下より説明する。
 
-本研究ではMHD方程式を陽的な時間積分法である４次ルンゲ＝クッタ法を用いて計算する。陽的な計算手法を用いて計算する場合、以下のCFL(Courant-Friedrichs-Lewy)条件を満たす必要がある。CFL条件とはシミュレーション内の情報が伝播する速さは物理的に計算される波の伝播速度を超えてはいけないという制約条件である（この制約を破るとシミュレーションで得られる数値に物理的な意味がなくなる）。例えば、音波モードのみが存在する1次元の系におけるCFL条件は以下の式で表される。
+本研究ではMHD方程式を陽的な時間積分法である４次ルンゲ＝クッタ法を用いて計算する。陽的な計算手法を用いて計算する場合、以下のCFL(Courant-Friedrichs-Lewy)条件を満たす必要がある。CFL条件とはシミュレーション内の情報が伝播する速さが物理的に計算される波の伝播速度を超えてはいけないという制約条件である（この制約を破るとシミュレーションで得られる数値に物理的な意味がなくなる）。例えば、音波モードのみが存在する1次元の系におけるCFL条件は以下の式で表される：
 \begin{equation}
-\Delta t < \frac{\Delta x}{C} 
+\Delta t < \alpha\frac{\Delta x}{C} 
 \end{equation}
-ここで$\Delta t$はシミュレーションの時間刻み幅、$\Delta x$はシミュレーションの格子間隔、$C$は音速である。
+ここで$\Delta t$はシミュレーションの時間刻み幅、$\Delta x$はシミュレーションの格子間隔、$C$は音速、$\alpha$は定数である。
 この式からシミュレーションの格子間隔が小さいほど、より短い時間刻み幅で数値解析を行う必要があることがわかる。
 つまり、格子点が集中している特異点付近は時間刻み幅を小さくする必要があり、全ての格子点はその時間刻み幅に合わせなければならない。
 よって、格子点の集中は計算コストの増大につながりシミュレーションの時間発展を妨げる障害となる。
 
-この格子点の集中を避けるために考案されたのがYin--Yang--Zhong格子である。~\cite{hayashi2016yin}
+この格子点の集中を避けるために考案されたのがYin--Yang--Zhong格子である\cite{hayashi2016yin}。
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.5\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/grid.png}
-\caption{Spherical polar coordinates. Grid points concentrated around the poles and the origin.} \label{fig:grid}
+\caption{Spherical polar coordinates. Grid points are concentrated around the poles and the origin.} \label{fig:grid}
 \end{figure}
 
 
 
 %=============================================
 \subsection{Yin--Yang 格子の利点と Zhong 格子の導入}
-ここでは、Yin--Yang--Zhong格子の前身となる「Yin--Yang 格子」 (Kageyama \& Sato \cite{kageyama2004yin})について説明する。Yin--Yang 格子とは、球座標格子の低緯度部分を切り取った格子を2つ組み合わせて球全体を覆う重合格子法の1つである。Yin--Yang 格子の構成要素は、球座標系の以下の余緯度$\theta$、経度$\phi$を切り取ったものである。
+ここでは、Yin--Yang--Zhong格子の前身となる「Yin--Yang 格子」 (Kageyama \& Sato \cite{kageyama2004yin})について説明する。Yin--Yang 格子とは、球座標格子の低緯度部分を切り取った格子を2つ組み合わせて球全体を覆う重合格子法の1つである。Yin--Yang 格子の構成要素は、球座標系の以下の余緯度$\theta$、経度$\phi$を切り取ったものである：
 \begin{equation}
 \frac{\pi}{4} \leq \theta \leq \frac{3\pi}{4}
 \end{equation}
@@ -297,8 +306,8 @@ k_4 &=& f(q_j+\Delta tk_3,t_j+\Delta t)
 -\frac{3\pi}{4} \leq \phi \leq \frac{3\pi}{4}
 \end{equation}
 
-Yin 格子は、球座標系の式 (2),(3) の範囲の格子である。Yang 格子は Yin 格子と同形であり、軸を回転させたものである。Yin 格子とYang 格子の二つを組み合わせて球を覆うことによって外核を表現する。 Yin--Yang 格子は球座標格子の利点である低緯度部分を用いているので、極付近への格子の集中を避けることができる。シミュレーションでは、Yin 格子、Yang 格子ともに球座標格子系で計算を行い、それぞれの境界値を求める場合にはYang格子が本来、Yin格子の軸を回転させたものであることを考慮し、それぞれの格子で補間を行う。Yin-Yang 格子を用いた球殻シミュレーションは様々な研究に応用されている。
-一方、Yin--Yang 格子を用いても球の原点付近での格子の集中は回避できない。そこで 新たに考案されたのが「Zhong 格子」である。Fig.\ref{fig:YYZthesis}に Yin--Yang--Zhong 格子の構造を示す。Zhong 格子は、Yin--Yang 格子で覆われた球中心の空洞部分に導入されるカーテシアン座標格子である。Yin--Yang 格子による球殻部分を Shell、Zhong 格子に よる球中心部分を Core と呼ぶ。Shell の内縁半径を$r_{c}$ とし、その内側に Core を配置する。 Yin--Yang--Zhong 格子を用いることで、ほぼ均一な格子間隔で全球シミュレーションを行 うことが可能となる。
+Yin 格子は、球座標系の式 (2),(3) の範囲の格子である。Yang 格子は Yin 格子と同形であり、軸を回転させたものである。Yin 格子とYang 格子の二つを組み合わせて球を覆うことによって外核を表現する。 Yin--Yang 格子は球座標格子の利点である低緯度部分を用いているので、極付近への格子の集中を避けることができる。シミュレーションでは、Yin 格子、Yang 格子ともに球座標格子系で計算を行い、それぞれの境界値を求める場合にはYang格子が本来、Yin格子の軸を回転させたものであることを考慮し、それぞれの格子で補間を行う。Yin-Yang 格子を用いた球殻シミュレーションは、地球科学と惑星科学\cite{peng2006conservative}、太陽物理学と宇宙物理\cite{shiota2010magnetohydrodynamic}、天体物理\cite{wongwathanarat2010axis}、画像処理\cite{hara2015gradient}など様々な研究に応用されている。
+一方、Yin--Yang 格子を用いても球の原点付近での格子の集中は回避できない。そこで 新たに考案されたのが「Zhong 格子」である。Fig.\ref{fig:YYZthesis}に Yin--Yang--Zhong 格子の構造を示す。Zhong 格子は、Yin--Yang 格子で覆われた球中心の空洞部分に導入されるカーテシアン座標格子である。Yin--Yang 格子による球殻部分を Shell、Zhong 格子に よる球中心部分を Core と呼ぶ。Shell の内縁半径を$r_{c}$ とし、その内側に Core を配置する。 Yin--Yang--Zhong 格子を用いることで、ほぼ均一な格子間隔で全球シミュレーションを行うことが可能となる。
 Yin--Yang--Zhong 格子を用いたシミュレーションでは、Yin 領域、Yang 領域、Zhong 領域 で別々の並列プロセスが割り当てられる。Core 領域である r = $r_{c}$ の球全体を囲む、一辺 が 2$r_{c}$ の立方体を l-cube と呼ぶ。ユーザーは、l-cube の x-y-z 方向の分割数を指定す る。分割したうちの 1 つの区画を s-cube と呼ぶ。Core 領域に少しでも重なっている部分 を持つ s-cube には並列プロセスを割り当て、Core 領域と重なった部分を持たない s-cube には並列プロセスを割り当てない。これにより、Shell 領域、Core 領域それぞれに効率よく並列プロセスを割り当てることができる。
 
 \begin{figure}[H]
@@ -455,10 +464,10 @@ r_c \leq r \leq r_c + 2\Delta r
 
 %=============================================
 \section{Fortranプリプロセッサの開発}
-本研究のシミュレーションプログラムの実装に関して、より便利で簡潔なコーディングを目指すべくプログラミング言語の１つであるFortranのプリプロセッサを開発した。その詳細をこれより説明する。
+球内部のMHD緩和現象を解明するために当研究室では数年前からYin--Yang--Zhong格子に基づくシミュレーションプログラムを開発し、改訂を続けてきた。このシミュレーションコードは現在ではかなり規模の大きなものである。シミュレーションモデルの変更に合わせて現在でもシミュレーションコードは絶え間なく改訂を続けているが、コードの複雑さが増大したためにバグの混入のない安全な改訂を継続的に進めることが困難になってきた。このシミュレーションコードはFortranで書かれている。そこで、より便利で簡潔なコーディングを目指すべくFortranのプリプロセッサを開発した。
 %=============================================
 \subsection{現代的Fortranの問題点}
-Fortranとは1950年代に誕生した世界初の高級プログラミング言語の一つであり、その特徴はHPC(High Performance Computing：高性能計算)に特化していることである。FortranがHPCとして優れている点は以下の通りである。
+Fortranとは1950年代に誕生した世界初の高級プログラミング言語の一つであり、その特徴はHPC (High Performance Computing：高性能計算)に特化していることである。FortranがHPCとして優れている点は以下の通りである：
 
 
 \begin{itemize}
@@ -469,7 +478,7 @@ Fortranとは1950年代に誕生した世界初の高級プログラミング言
 \item 数学ライブラリを含めて科学技術関係のコードが豊富であること。
 \end{itemize}
 
-Fortranは現在でもバージョンアップし続け、特にFortran 2003では大きな仕様変更がされた。よってFortran 2003以降のバージョンを現代的Fortran(Modern Fortran)と呼ばれることが多い。
+Fortranは現在でもバージョンアップし続け、特にFortran 2003では大きな仕様変更がされた。Fortran 2003以降のバージョンを現代的Fortran (Modern Fortran)と呼ぶことが多い。
 この現代的Fortranには様々な便利な機能を備えているものの、シミュレーションにおいては使いづらいところがある。例えば、CやJavaに標準的に用意されている複数行をまとめてコメントアウトする機能（ブロックコメントアウト）は現代的Fortranに備わっていないので、一行一行の行頭に「！」(exclamation mark)をつける必要がある(Fig.\ref{block-comment1})。これはトライ＆エラーを繰り返す数値シミュレーションを行うものにとって大きな手間となり負担となる。このようなストレスがかかるコーディングを避けるために、新しいFortranの方言eFortranとそれを標準Fortranに文字列変換するプリプロセッサefppを開発した。
 
 \begin{figure}[H]
@@ -480,7 +489,7 @@ Fortranは現在でもバージョンアップし続け、特にFortran 2003で�
 
 
 \subsection{eFortranとefpp}
-プリプロセッサとはプログラムをコンパイルする前にそのプログラムになんらかの処理をするプログラムのことである。本研究で開発したプリプロセッサefppは通常コンパイルできない特殊な文法のプログラムを文字列置換によってコンパイル可能なプログラムに書き換える。我々はこの特殊な文法のプログラミング言語をeFortranと名付けた。つまり、eFortranで書かれたプログラムをefppによってコンパイル可能なプログラムに書き換えるという仕組みである（Fig.\ref{conversion}）。efppはPythonというプログラミング言語で書かれている。その理由はコンパイルが不要で実行が簡単であるから、文字列変換に用いる正規表現が得意であるからなどである。
+プリプロセッサとはプログラムをコンパイルする前にそのプログラムになんらかの処理をするプログラムのことである。Fortranのプリプロセッサは以前より研究されてきた\cite{kernighan1975ratfor}\cite{tsuji1988structured}が、それらのプリプロセッサは主に構造的でなかった（goto文を使用していた）昔のFortranを構造的にするために使われていた。本研究で開発したプリプロセッサefppは通常コンパイルできない特殊な文法のプログラムを文字列置換によってコンパイル可能なプログラムに書き換える。我々はこの特殊な文法のプログラミング言語（方言）をeFortranと名付けた。つまり、eFortranで書かれたプログラムをefppによってコンパイル可能なプログラムに書き換えるという仕組みである（Fig.\ref{conversion}）。efppはPythonで書いた。その理由は文字列変換に用いる正規表現が得意であることなどである。
 
 \begin{figure}[H]
 \centering
@@ -489,13 +498,13 @@ Fortranは現在でもバージョンアップし続け、特にFortran 2003で�
 \end{figure}
 
 
-efppの利点は数多くある。
+efppの機能として
 \begin{itemize}
 \item シミュレーションでよく使う構文を簡潔に書くことができる。（繰り返し、初期化、変数定義など）
 \item efppは実質文字列を変換しているだけなので、ユーザーが新しい文法を追加したり、必要ない文法を無視したりすることができる。
 \item 文字列変換によって行番号を変えないようにしている、これはデバグの際に混乱することを避けるためである。
+などが挙げられる。
 \end{itemize}
-%(1)については・・・
 
 \subsection{具体例}
 ここでは３つの具体例を通して、eFortranの詳細を説明する。
@@ -548,7 +557,7 @@ real(DR), intent(in), optional :: p
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.5\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/declarations.png}
-\caption{In standard Fortran, declarations to be long lines (top). But in eFortran, it can be write simply (bottom).} \label{declarations}
+\caption{In standard Fortran, variable are some times too long declarations (top). On the other hand in eFortran, they can be short (bottom).} \label{declarations}
 \end{figure}
 
 \subsubsection{マクロ定義}
@@ -596,7 +605,7 @@ Yin--Yang--Zhong格子を用いて単位球体内部(半径$r=1$)でのMHD方程
 \subsection{初期条件}
 
 \subsubsection{圧力・質量密度}
-本研究において圧縮性MHD方程式を解くものの、シミュレーションの精度上、圧縮性の物理的な効果は可能な限り小さくするものとする。よって、代表的な流速を$U$、音速を$C$とすると
+本研究では圧縮性MHD方程式を解く。圧縮性の物理的な効果は可能な限り小さくするために、代表的な流速を$U$、音速を$C$とすると
 \begin{equation}
 \mathcal{M} = \frac{U}{C}
 \end{equation}
@@ -604,56 +613,85 @@ Yin--Yang--Zhong格子を用いて単位球体内部(半径$r=1$)でのMHD方程
 \begin{equation}
 C = \sqrt{\gamma\frac{p}{\rho}}
 \end{equation}
-は$\mathcal{O}(10)$程度となるので、本研究の全て初期状態において圧力$p$と質量密度$\rho$に
+は$\mathcal{O}(10)$程度とする。初期状態において規格化した圧力$p$と質量密度$\rho$は
 \begin{eqnarray}
 p &=& 100.0, \\
 \rho &=& 1.0, 
 \end{eqnarray}
-を与えた。
+とする。
 
 \subsubsection{球面調和関数}
 本研究のシミュレーションの初期条件として球面調和関数を用いた。ここではまず、球面調和関数の概要を説明する。
 
-球面調和関数とは球面状の関数$f(\theta,\phi)$を展開するのに用いられる関数群のことをいう。つまり、$f(\theta,\phi)$は次式のように球面調和関数$Y_l^m$の線形和で表すことができる。
+球面調和関数とは球面上の関数$f(\theta,\phi)$を展開するのに便利な特殊関数である。$f(\theta,\phi)$は次式のように球面調和関数$Y_l^m$の線形和で表すことができる：
 
 \begin{equation}
 f(\theta,\phi) = \sum_{l=0}^L \sum_{m=-l}^l c_l^m Y_l^m (\theta,\phi)
 \end{equation}
 
-ここで、$l,m$はそれぞれ$0\leq |m| \leq l$を満たす整数、$c$は定数である。この式より球面調和関数はフーリエ級数展開を球面に対応させたものといえる。
-また球面調和関数自体は次式で表される。
+ここで、$l,m$はそれぞれ$0\leq |m| \leq l$を満たす整数、$c_l^m$は定数である。球面調和関数はフーリエ級数展開を球面に対応させたものともいえる。以下に$0 \leq l \leq 4$の球面調和関数のボリュームレンダリングをに示す(Fig.\ref{spherical})。緑色は正、赤色は負の領域を表す。
+\begin{figure}[H]
+\centering
+\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/spherical2.png}
+\caption{The first 5 Spherical Harmonics plotted ad unsigned spherical functions by distance from the origin. Green are positive values and red are negative.\cite{green2003spherical} } \label{spherical}
+\end{figure}
+
+
+また球面調和関数自体は次式で表される：
 
 \begin{equation}
-Y_l^m(\theta,\phi) = P_l^m (cos\theta)e^{im\phi}
+Y_l^m(\theta,\phi) = \sqrt{\frac{4\pi}{2l+1}\frac{(l+m)!}{(l-m)!}}P_l^m (cos\theta)e^{im\phi}
 \end{equation}
 
-ここで、$P_l^m (cos\theta)$はルジャンドル陪関数であり緯度方向の展開を表している（$e^{im\phi}$は経度方向の展開を表す）。以下の表(Table.\ref{spherical})は異なる$(l,m)$におけるルジャンドル陪関数と球面調和関数を示している。
+ここで、$P_l^m (x)$はルジャンドル陪関数であり緯度方向の展開を表している（ちなみに$e^{im\phi}$は経度方向の展開を表す）。
 
-\begin{table}[H]
-\centering
-\caption{Associated Legendre polynomials (left), and spherical harmonics (right).} \label{spherical}
-\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/spherical_harmonics.png}
-\end{table}
+本研究のシミュレーションではこの球面調和関数の$(l,m)=(3,1),(3,2),(3,3)$の３パターンを初期条件として行った。
+具体的には初期の磁場のベクトルポテンシャル$\bm a$と質量流速$\bm f$をそれぞれ以下のように設定した。また以下の表(Table.\ref{spherical})は$(l,m)=(3,1),(3,2),(3,3)$のルジャンドル陪関数と球面調和関数を表している。
 
-シミュレーションではこの球面調和関数の$(l,m)=(3,1),(3,2),(3,3)$の３パターンを初期条件として行った。具体的に初期の磁場のベクトルポテンシャル$\bm a$と質量流速$\bm f$はそれぞれ以下のように設定する。$C$は定数であり全ての$(l,m)$において$C=0.2$とした。
 \begin{equation}
+\bm a
+=
 \begin{pmatrix}
 a_r \\ a_\theta \\ a_\phi  
 \end{pmatrix} 
 =
 \begin{pmatrix}
 C \times r \times sin^2(\pi r) P_l^m (cos\theta)cos(m\phi) \\ 0 \\ 0 
-\end{pmatrix} , \;
+\end{pmatrix} , 
+\end{equation}
+
+\begin{equation}
 \bm f = \bm 0
 \end{equation}
-以下にそれぞれの$(l,m)$のときの初期磁力線を示す（Fig.\ref{initialMag1}）。それぞれ左から$(l,m)=(3,1)$、$(l,m)=(3,2)$、$(l,m)=(3,3)$の磁場を表している。
 
+\begin{table}[H]
+\centering
+\caption{Associated Legendre polynomials (left), and spherical harmonics (right).} \label{spherical}
+\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/spherical_harmonics3.png}
+\end{table}
+
+$C$は定数であり全ての$(l,m)$において$C=0.2$とした。また以下に初期状態の磁力線（Fig.\ref{initialMag1}）および半径$r=0.9$で経度方向の磁場$b_\phi$の球面分布(Fig.\ref{initialMag_moll})と球面調和関数展開した時の係数$|c|^2$のグラフ(Fig.\ref{initialMag_ff})をそれぞれ示す。
+%それぞれ左から$(l,m)=(3,1)$、$(l,m)=(3,2)$、$(l,m)=(3,3)$の磁場を表している。
 \begin{figure}[H]
 \centering
 %\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/initialMag1.png}
 %\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/initialMag2.png}
 \includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/initialMag3.png}
 \caption{Initial magnetic field in $(l,m)=(3,1)$(left), $(3,2)$(middle), $(3,3)$(right).  } \label{initialMag1}
+\end{figure}
+\begin{figure}[H]
+\centering
+%\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/initialMag1.png}
+%\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/initialMag2.png}
+\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/mollwide_b0p.png}
+\caption{Initial magnetic field in $(l,m)=(3,1)$(left), $(3,2)$(middle), $(3,3)$(right).  } \label{initialMag_moll}
+\end{figure}
+\begin{figure}[H]
+\centering
+%\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/initialMag1.png}
+%\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/initialMag2.png}
+\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/ff_b0p.png}
+\caption{Initial magnetic field in $(l,m)=(3,1)$(left), $(3,2)$(middle), $(3,3)$(right).  } \label{initialMag_ff}
 \end{figure}
 
 
@@ -682,7 +720,7 @@ C \times r \times sin^2(\pi r) P_l^m (cos\theta)cos(m\phi) \\ 0 \\ 0
 本研究では、磁場に関しては完全導体壁境界条件（磁力線が境界を貫かない）、速度場に関してはrigid境界条件（流れがない）、温度に関しては断熱境界条件（熱の出入りがない）を用いた。つまり境界面を$S$、境界面に垂直な単位ベクトルを$\bm n$とすると
 \begin{align}
 \bm{v} &= \bm{0} \; ({\rm on}\, S), \\
-\bm{a} \times \bm{n} &= \bm{0} , \; \nabla \cdot \bm{a} = \bm{0} \; ({\rm on}\, S), \\
+\bm{a} \times \bm{n} &= \bm{0} , \; \frac{\partial a_r}{\partial r} = 0 \; ({\rm on}\, S), \\
 \frac{\partial T}{\partial r} &= 0 \; \Leftrightarrow \; \frac{\partial}{\partial r}\left(\frac{p}{\rho}\right) = 0 \; (\because p=\rho T) \; ({\rm on}\, S),  
 \end{align}
 を意味する。
@@ -739,30 +777,52 @@ C \times r \times sin^2(\pi r) P_l^m (cos\theta)cos(m\phi) \\ 0 \\ 0
 \subsection{エネルギーのグラフ}
 以下に球面調和関数$Y_l^m$の
 \begin{description}
-\item{(a)} $(l,m)=(3,1)$の場合
-\item{(b)} $(l,m)=(3,2)$の場合
-\item{(c)} $(l,m)=(3,3)$の場合
+\item{(a)} $(l,m)=(3,1)$
+\item{(b)} $(l,m)=(3,2)$
+\item{(c)} $(l,m)=(3,3)$
 \end{description}
-それぞれの運動エネルギーおよび磁気エネルギーのグラフを示す（Fig.\ref{L3M1_graph}-\ref{L3M3_graph})。なおグラフ化ツールにはgnuplotを用いた。
+%それぞれの運動エネルギーおよび磁気エネルギーのグラフを示す（Fig.\ref{L3M1_graph}-\ref{L3M3_graph})。なおグラフ化ツールにはgnuplotを用いた。
+それぞれの場合における全運動エネルギーおよび全磁気エネルギーのグラフを示す（Fig.\ref{L3M1_graph}-\ref{L3M3_graph})。ここで球領域$V$内の全運動エネルギー$E_{kin}$と全磁気エネルギー$E_{mag}$はそれぞれ次式で表される：
+\begin{eqnarray}
+E_{kin} &=& \int_V \frac{1}{2} \rho \bm v^2 dV, \\
+E_{mag} &=& \int_V \frac{1}{2} \bm b^2 dV
+\end{eqnarray}
+なおグラフ化ツールにはgnuplotを用いた。
+%\begin{figure}[H]
+%\centering
+%\includegraphics[height=0.5\textheight,width=0.7\hsize,angle=0,keepaspectratio]{./Image/L3M1_graph.png}
+%\caption{Relaxation of total magnetic(purple line) and flow(green line) energy in $(l,m)=(3,1)$.} \label{L3M1_graph}
+%\end{figure}
+%\begin{figure}[H]
+%\centering
+%\includegraphics[height=0.5\textheight,width=0.7\hsize,angle=0,keepaspectratio]{./Image/L3M2_graph.png}
+%\caption{Relaxation of total magnetic(purple line) and flow(green line) energy in $(l,m)=(3,2)$.} \label{L3M2_graph}
+%\end{figure}
+%\begin{figure}[H]
+%\centering
+%\includegraphics[height=0.5\textheight,width=0.7\hsize,angle=0,keepaspectratio]{./Image/L3M3_graph.png}
+%\caption{Relaxation of total magnetic(perple line) and flow(green line) energy in $(l,m)=(3,3)$.} \label{L3M3_graph}
+%\end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.5\textheight,width=0.7\hsize,angle=0,keepaspectratio]{./Image/L3M1_graph.png}
+\includegraphics[height=0.5\textheight,width=0.7\hsize,angle=0,keepaspectratio]{./Image/L3M1_graph2.png}
 \caption{Relaxation of total magnetic(purple line) and flow(green line) energy in $(l,m)=(3,1)$.} \label{L3M1_graph}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.5\textheight,width=0.7\hsize,angle=0,keepaspectratio]{./Image/L3M2_graph.png}
+\includegraphics[height=0.5\textheight,width=0.7\hsize,angle=0,keepaspectratio]{./Image/L3M2_graph2.png}
 \caption{Relaxation of total magnetic(purple line) and flow(green line) energy in $(l,m)=(3,2)$.} \label{L3M2_graph}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.5\textheight,width=0.7\hsize,angle=0,keepaspectratio]{./Image/L3M3_graph.png}
+\includegraphics[height=0.5\textheight,width=0.7\hsize,angle=0,keepaspectratio]{./Image/L3M3_graph2.png}
 \caption{Relaxation of total magnetic(perple line) and flow(green line) energy in $(l,m)=(3,3)$.} \label{L3M3_graph}
 \end{figure}
 
 
-いずれの場合も磁気エネルギーと運動エネルギーがお互いにエネルギーを交換しあい振動していることがわかる。そして最終的に振動は落ち着き、双方が線形的に減衰している。一番興味があるのはこのエネルギーが線形的に減衰している時で、それぞれグラフがプロットしている時刻の最大値付近では系が十分緩和していると考えられる。
+いずれの場合も磁気エネルギーと運動エネルギーがお互いにエネルギーを交換しあい振動していることがわかる。そして最終的に振動は落ち着き、双方がゆっくりと減衰している。一番興味があるのはゆっくりと減衰しているこの時で、それぞれグラフがプロットしている時刻の最大値付近では系が十分緩和していると考えられる。
+
 
 \subsection{緩和状態の三次元構造}
 以下に緩和状態の磁力線および流線の3次元構造を示す（Fig.\ref{L3M1_relaxed}-\ref{L3M3_relaxed})。流線は流れのベクトル図に重ね合わせている。
@@ -784,21 +844,39 @@ C \times r \times sin^2(\pi r) P_l^m (cos\theta)cos(m\phi) \\ 0 \\ 0
 \end{figure}
 
 これらのうち流れ場の構造の特徴が特に顕著だと思われる$(l,m)=(3,3)$を重点的に解析する。
-\subsubsection{$(l,m)=(3,3)$のときの緩和状態}
+
+\subsection{$(l,m)=(3,3)$の緩和状態}
+以下に緩和時の磁場の経度成分$b_\phi$と半径成分$b_r$および速度場の半径成分$v_r$の球面分布（Fig.\ref{moll_vr}）と球面調和関数展開した係数${|c|}^2$のグラフ（Fig.\ref{ff_vr}）を示す。半径$r=0.9$とし、Fig.\ref{mol_vr}の可視化手法にはモルワイデ図法を用いた。
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.5\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/mollwide_bp_br_vr.png}
+\caption{Equatonal plane(top), and meridian plane(bottom) of stream tracer: relaxed magnetic field(left) and flow(right) in $(l,m)=(3,3)$.}\label{moll_vr}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.5\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/ff_bp_br_vr.png}
+\caption{Equatonal plane(top), and meridian plane(bottom) of stream tracer: relaxed magnetic field(left) and flow(right) in $(l,m)=(3,3)$.}\label{ff_vr}
+\end{figure}
+
+まず緩和後の流れ場の半径成分において、表面付近で$Y_2^0$の成分が強く、四重極状に緩和していることがわかる。また、
+
 以下にFig.\ref{L3M3_relaxed}の赤道断面（Fig.\ref{clip_L3M3_xy}上）と子午断面（Fig.\ref{clip_L3M3_xy}下）を示す。
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.5\textheight,width=0.7\hsize,angle=0,keepaspectratio]{./Image/clip_L3M3_xy.png}
 \includegraphics[height=0.5\textheight,width=0.7\hsize,angle=0,keepaspectratio]{./Image/clip_L3M3_xz.png}
-\caption{Equator plane(top), and meridian plane(bottom) of stream tracer: relaxed magnetic field(left) and flow(right) in $(l,m)=(3,3)$.}\label{clip_L3M3_xy}
+\caption{Equatonal plane(top), and meridian plane(bottom) of stream tracer: relaxed magnetic field(left) and flow(right) in $(l,m)=(3,3)$.}\label{clip_L3M3_xy}
 \end{figure}
+
+
+
 
 これより緩和状態の構造は以下のような模式図（Fig.\ref{L3M3_cartoon}）で表される。赤色は磁力線、青色は流れ場を表している。
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.5\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/relaxedL3M3_cartoon.png}
-\caption{3D Structure of relaxed magnetic field(red), and flow(blue) in $(l,m)=(3,3)$.}\label{L3M3_cartoon}
+\caption{3D structure of relaxed magnetic field(red), and flow(blue) in $(l,m)=(3,3)$.}\label{L3M3_cartoon}
 \end{figure}
 \noindent
 この図より速度場の遷移が以下のようになることがわかる。
@@ -820,7 +898,7 @@ C \times r \times sin^2(\pi r) P_l^m (cos\theta)cos(m\phi) \\ 0 \\ 0
 
 %=============================================
 \section{結論}
-エネルギーが不安定な状態から安定な状態に落ち着くという緩和は自然界の多くに見られ、MHD流体も例外ではない。MHD流体の緩和状態は領域内で力が全く働かないforce-free状態であるというTaylor理論は多くの実験に適用されてきた。しかし、Taylor理論は運動エネルギーが無視され、緩和状態では流れが存在しないと仮定されている。そこで本研究では球ジオメトリ内部でのMHD流体の緩和について計算機（スパコン）上で調べた。
+エネルギーが不安定な状態から安定な状態に落ち着くという緩和は自然界の多くに見られ、MHD流体も例外ではない。MHD流体の緩和状態は領域内で力が全く働かないforce-free状態であるというTaylor理論は多くの実験に適用されてきた。しかし、Taylor理論は運動エネルギーが無視され、緩和状態では流れが存在しないと仮定されている。そこで本研究では球ジオメトリ内部でのMHD流体の緩和についてスーパーコンピュータを用いた計算機シミュレーションで調べた。
 
 本研究の設定として、完全導体かつ外部から力が働かない断熱の境界である球にMHD流体が入っている状況を想定した。また初期条件として球面調和関数を磁場を与えた。球面調和関数で表されるリング上の磁場は、磁場の輪が縮む方向にローレンツ力が働きそれが起動力となってMHD流体が動き出した。
 
