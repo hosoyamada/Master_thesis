@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.8.2-190131-2.6 (utf8.euc) (TeX Live 2019) (preloaded format=platex 2020.1.29)  29 JAN 2020 16:37
+This is e-pTeX, Version 3.14159265-p3.8.2-190131-2.6 (utf8.euc) (TeX Live 2019) (preloaded format=platex 2020.1.29)  4 FEB 2020 01:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -317,7 +317,11 @@ File: listings.cfg 2019/02/27 1.8b listings configuration
 ))
 Package: listings 2019/02/27 1.8b (Carsten Heinz)
 
-(./thesis.aux)
+(./thesis.aux
+
+LaTeX Warning: Label `spherical' multiply defined.
+
+)
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
@@ -374,119 +378,168 @@ LaTeX Font Info:    ... okay on input line 16.
 \Hy@linkcounter=\count129
 \c@lstlisting=\count130
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 44.
+(Font)              scaled to size 13.83836pt on input line 43.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 44.
+(Font)              scaled to size 13.83836pt on input line 43.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 44.
-LaTeX Font Info:    Try loading font information for U+msa on input line 44.
+(Font)              scaled to size 6.72699pt on input line 43.
+LaTeX Font Info:    Try loading font information for U+msa on input line 43.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 44.
+LaTeX Font Info:    Try loading font information for U+msb on input line 43.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 44.
+(Font)              scaled to size 13.83836pt on input line 43.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 44.
+(Font)              scaled to size 9.60999pt on input line 43.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 44.
+(Font)              scaled to size 6.72699pt on input line 43.
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 47.
+(Font)              scaled to size 11.53198pt on input line 45.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 47.
+(Font)              scaled to size 11.53198pt on input line 45.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 51.
+(Font)              scaled to size 13.83836pt on input line 48.
  [1
 
-]
+] [2]
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 60.
+(Font)              scaled to size 9.60999pt on input line 73.
 
 (./thesis.toc
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
 (Font)              scaled to size 4.805pt on input line 2.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 4.805pt on input line 2.
- [2])
+ [3])
 \tf@toc=\write3
 \openout3 = `thesis.toc'.
 
- [3]
+ [4]
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 67.
+(Font)              scaled to size 11.53198pt on input line 80.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 67.
- [1]
+(Font)              scaled to size 11.53198pt on input line 80.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 84.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 81.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 84.
+(Font)              scaled to size 9.60999pt on input line 81.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 84.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 81.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 84.
+(Font)              scaled to size 9.60999pt on input line 81.
 
+
+LaTeX Warning: Citation `プラズマシミュレーション' on page 1 undefined on input
+ line 81.
+
+
+LaTeX Warning: Citation `地球ダイナモ研究のこれまでとこれから' on page 1 undefi
+ned on input line 83.
+
+[1]
 
 LaTeX Warning: Citation `プラズマ核融合シミュレーションの発展と将来への期待' on
- page 2 undefined on input line 84.
+ page 2 undefined on input line 94.
 
 
 LaTeX Warning: Citation `woltjer1958theorem' on page 2 undefined on input line 
-86.
+96.
 
 
 LaTeX Warning: Citation `taylor1974relaxation' on page 2 undefined on input lin
-e 86.
-
-
-LaTeX Warning: Citation `コンピュータによる熱移動と流れの数値解析' on page 2 un
-defined on input line 86.
+e 96.
 
 [2]
 
-LaTeX Warning: Citation `宇宙流体力学' on page 3 undefined on input line 93.
+LaTeX Warning: Citation `宇宙流体力学' on page 3 undefined on input line 103.
 
 [3]
 
 LaTeX Warning: Citation `taylor1974relaxation' on page 4 undefined on input lin
-e 144.
+e 154.
 
 
-LaTeX Warning: Citation `MagnetohydrodynamicsOfPlasmaRelaxation' on page 4 unde
-fined on input line 144.
+LaTeX Warning: Citation `ortolani1993magnetohydrodynamics' on page 4 undefined 
+on input line 154.
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 186.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 196.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 186.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 196.
  [4]
 File: ./Image/init_mag_12.png Graphic file (type bmp)
 <./Image/init_mag_12.png>
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 197.
+(Font)              scaled to size 8.64899pt on input line 208.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 197.
+(Font)              scaled to size 8.64899pt on input line 208.
 File: ./Image/Yamamoto_relaxation.png Graphic file (type bmp)
 <./Image/Yamamoto_relaxation.png>
- [5] [6]
+
+
+LaTeX Warning: Citation `理工学のための数値計算法' on page 5 undefined on input
+ line 220.
+
+[5] [6]
+
+LaTeX Warning: Citation `mininni2006magnetohydrodynamic' on page 7 undefined on
+ input line 252.
+
+
+LaTeX Warning: Citation `理工学のための数値計算法' on page 7 undefined on input
+ line 262.
+
+
+LaTeX Warning: Citation `yoshimura1975model' on page 7 undefined on input line 
+267.
+
+
+LaTeX Warning: Citation `chen2014global' on page 7 undefined on input line 267.
+
+
 [7]
 
-LaTeX Warning: Citation `hayashi2016yin' on page 8 undefined on input line 280.
+LaTeX Warning: Citation `kageyama1993simulation' on page 8 undefined on input l
+ine 278.
+
+
+LaTeX Warning: Citation `kageyama1993simulation' on page 8 undefined on input l
+ine 278.
+
+
+LaTeX Warning: Citation `hayashi2016yin' on page 8 undefined on input line 289.
 
 
 File: ./Image/grid.png Graphic file (type bmp)
 <./Image/grid.png>
 [8]
 
-LaTeX Warning: Citation `kageyama2004yin' on page 9 undefined on input line 292
+LaTeX Warning: Citation `kageyama2004yin' on page 9 undefined on input line 301
 .
+
+
+LaTeX Warning: Citation `peng2006conservative' on page 9 undefined on input lin
+e 309.
+
+
+LaTeX Warning: Citation `shiota2010magnetohydrodynamic' on page 9 undefined on 
+input line 309.
+
+
+LaTeX Warning: Citation `wongwathanarat2010axis' on page 9 undefined on input l
+ine 309.
+
+
+LaTeX Warning: Citation `hara2015gradient' on page 9 undefined on input line 30
+9.
 
 [9]
 File: ./Image/YYZthesis.pdf Graphic file (type pdf)
@@ -497,14 +550,24 @@ File: ./Image/sphericalNormalVectors.pdf Graphic file (type pdf)
  [14] [15]
 File: ./Image/block_comment1.png Graphic file (type bmp)
 <./Image/block_comment1.png>
+
+
+LaTeX Warning: Citation `kernighan1975ratfor' on page 16 undefined on input lin
+e 492.
+
+
+LaTeX Warning: Citation `tsuji1988structured' on page 16 undefined on input lin
+e 492.
+
+[16]
 File: ./Image/conversion.png Graphic file (type bmp)
 <./Image/conversion.png>
- [16] [17]
+ [17]
 File: ./Image/block_comment2.png Graphic file (type bmp)
 <./Image/block_comment2.png>
 File: ./Image/block_comment3.png Graphic file (type bmp)
 <./Image/block_comment3.png>
-
+ [18]
 (/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/02/27 1.8b listings language file
 )
@@ -513,7 +576,7 @@ File: lstlang1.sty 2019/02/27 1.8b listings language file
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2019/02/27 1.8b (Carsten Heinz)
-) [18]
+)
 (/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/02/27 1.8b listings language file
 )
@@ -523,68 +586,123 @@ File: lstlang1.sty 2019/02/27 1.8b listings language file
 File: ./Image/declarations.png Graphic file (type bmp)
 <./Image/declarations.png>
  [19]
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 561.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 570.
 
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 561.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 570.
 File: ./Image/macros4.png Graphic file (type bmp)
 <./Image/macros4.png>
- [20]
+ [20] [21]
 File: ./Image/sample2_e03.png Graphic file (type bmp)
 <./Image/sample2_e03.png>
 File: ./Image/sample2_f90.png Graphic file (type bmp)
 <./Image/sample2_f90.png>
- [21]
+
 [22] [23]
-File: ./Image/spherical_harmonics.png Graphic file (type bmp)
-<./Image/spherical_harmonics.png>
+File: ./Image/spherical2.png Graphic file (type bmp)
+<./Image/spherical2.png>
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 636.
+LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
+(Font)              scaled to size 8.64899pt on input line 636.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 636.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 8.64899pt on input line 636.
+
+
+LaTeX Warning: Citation `green2003spherical' on page 24 undefined on input line
+ 636.
+
+
+LaTeX Warning: Citation `green2003spherical' on page 24 undefined on input line
+ 636.
+
+[24]
+File: ./Image/spherical_harmonics3.png Graphic file (type bmp)
+<./Image/spherical_harmonics3.png>
+ [25]
+
+LaTeX Warning: Reference `initialMag_moll' on page 26 undefined on input line 6
+73.
+
+
+LaTeX Warning: Reference `initialMag_ff' on page 26 undefined on input line 673
+.
+
 File: ./Image/initialMag3.png Graphic file (type bmp)
 <./Image/initialMag3.png>
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 5.76599pt on input line 656.
+(Font)              scaled to size 5.76599pt on input line 680.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 656.
-LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 5.76599pt on input line 656.
- [24] [25] [26]
-File: ./Image/L3M1_graph.png Graphic file (type bmp)
-<./Image/L3M1_graph.png>
-File: ./Image/L3M2_graph.png Graphic file (type bmp)
-<./Image/L3M2_graph.png>
-File: ./Image/L3M3_graph.png Graphic file (type bmp)
-<./Image/L3M3_graph.png>
- [27] [28]
+(Font)              scaled to size 5.76599pt on input line 680.
+File: ./Image/b0p_L3M1.png Graphic file (type bmp)
+<./Image/b0p_L3M1.png>
+[26]
+File: ./Image/b0p_L3M2.png Graphic file (type bmp)
+<./Image/b0p_L3M2.png>
+File: ./Image/b0p_L3M3.png Graphic file (type bmp)
+<./Image/b0p_L3M3.png>
+ [27] [28] [29]
+File: ./Image/L3M1_graph2.png Graphic file (type bmp)
+<./Image/L3M1_graph2.png>
+File: ./Image/L3M2_graph2.png Graphic file (type bmp)
+<./Image/L3M2_graph2.png>
+File: ./Image/L3M3_graph2.png Graphic file (type bmp)
+<./Image/L3M3_graph2.png>
+ [30] [31]
 File: ./Image/relaxedL3M1.png Graphic file (type bmp)
 <./Image/relaxedL3M1.png>
 File: ./Image/relaxedL3M2.png Graphic file (type bmp)
 <./Image/relaxedL3M2.png>
 File: ./Image/relaxedL3M3.png Graphic file (type bmp)
 <./Image/relaxedL3M3.png>
- [29] [30]
+ [32] [33]
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 7.68799pt on input line 852.
+
+
+LaTeX Warning: Reference `moll_vr' on page 34 undefined on input line 853.
+
+
+LaTeX Warning: Reference `ff_vr' on page 34 undefined on input line 853.
+
+
+LaTeX Warning: Reference `mol_vr' on page 34 undefined on input line 853.
+
+File: ./Image/vr_L3M3.png Graphic file (type bmp)
+<./Image/vr_L3M3.png>
+File: ./Image/bp_L3M3.png Graphic file (type bmp)
+<./Image/bp_L3M3.png>
+[34]
 File: ./Image/clip_L3M3_xy.png Graphic file (type bmp)
 <./Image/clip_L3M3_xy.png>
 File: ./Image/clip_L3M3_xz.png Graphic file (type bmp)
 <./Image/clip_L3M3_xz.png>
-File: ./Image/relaxedL3M3_cartoon.png Graphic file (type bmp)
-<./Image/relaxedL3M3_cartoon.png>
- [31] [32] [33]
+ [35]
+File: ./Image/relaxedL3M3_cartoon2.png Graphic file (type bmp)
+<./Image/relaxedL3M3_cartoon2.png>
+ [36] [37]
 No file thesis.bbl.
 (./thesis.aux)
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 5745 strings out of 493223
- 78862 string characters out of 6144415
- 351045 words of memory out of 5000000
- 9608 multiletter control sequences out of 15000+600000
- 23884 words of font info for 104 fonts, out of 8000000 for 9000
+ 5803 strings out of 493223
+ 79707 string characters out of 6144415
+ 351697 words of memory out of 5000000
+ 9654 multiletter control sequences out of 15000+600000
+ 28500 words of font info for 122 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
- 33i,9n,60p,1197b,1333s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 33i,9n,60p,1591b,1333s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on thesis.dvi (36 pages, 93652 bytes).
+Output written on thesis.dvi (41 pages, 105564 bytes).

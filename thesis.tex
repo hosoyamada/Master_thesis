@@ -670,7 +670,7 @@ C \times r \times sin^2(\pi r) P_l^m (cos\theta)cos(m\phi) \\ 0 \\ 0
 \includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/spherical_harmonics3.png}
 \end{table}
 
-$C$は定数であり全ての$(l,m)$において$C=0.2$とした。また以下に初期状態の磁力線（Fig.\ref{initialMag1}）および半径$r=0.9$で経度方向の磁場$b_\phi$の球面分布(Fig.\ref{initialMag_moll})と球面調和関数展開した時の係数$|c|^2$のグラフ(Fig.\ref{initialMag_ff})をそれぞれ示す。
+$C$は定数であり全ての$(l,m)$において$C=0.2$とした。また以下に初期状態の磁力線（Fig.\ref{initialMag1}）および半径$r=0.9$の経度方向の磁場$b_\phi$の球面分布(Fig.\ref{initialMag_moll})と球面調和関数展開した時の係数$|c|^2$のグラフ(Fig.\ref{initialMag_ff})をそれぞれ示す。球面分布の可視化手法にはモルワイデ図法を用いた。
 %それぞれ左から$(l,m)=(3,1)$、$(l,m)=(3,2)$、$(l,m)=(3,3)$の磁場を表している。
 \begin{figure}[H]
 \centering
@@ -679,19 +679,23 @@ $C$は定数であり全ての$(l,m)$において$C=0.2$とした。また以下
 \includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/initialMag3.png}
 \caption{Initial magnetic field in $(l,m)=(3,1)$(left), $(3,2)$(middle), $(3,3)$(right).  } \label{initialMag1}
 \end{figure}
+
 \begin{figure}[H]
 \centering
-%\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/initialMag1.png}
-%\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/initialMag2.png}
-\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/mollwide_b0p.png}
-\caption{Initial magnetic field in $(l,m)=(3,1)$(left), $(3,2)$(middle), $(3,3)$(right).  } \label{initialMag_moll}
+\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/b0p_L3M1.png}
+\caption{Snapshots in logitude-latitude Mollwide Projection of initial longitude magnetic field $b_\phi$ (left) and coefficients of spherical harmonics for surface of sphere $r=0.9$ (right) in $(l,m)=(3,1)$.  } \label{b0p_L3M1}
 \end{figure}
+
 \begin{figure}[H]
 \centering
-%\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/initialMag1.png}
-%\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/initialMag2.png}
-\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/ff_b0p.png}
-\caption{Initial magnetic field in $(l,m)=(3,1)$(left), $(3,2)$(middle), $(3,3)$(right).  } \label{initialMag_ff}
+\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/b0p_L3M2.png}
+\caption{Snapshots in logitude-latitude Mollwide Projection of initial longitude magnetic field $b_\phi$ (left) and coefficients of spherical harmonics for surface of sphere $r=0.9$ (right) in $(l,m)=(3,2)$.  } \label{b0p_L3M2}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/b0p_L3M3.png}
+\caption{Snapshots in logitude-latitude Mollwide Projection of initial longitude magnetic field $b_\phi$ (left) and coefficients of spherical harmonics for surface of sphere $r=0.9$ (right) in $(l,m)=(3,3)$.  }\label{b0p_L3M3}
 \end{figure}
 
 
@@ -807,17 +811,17 @@ E_{mag} &=& \int_V \frac{1}{2} \bm b^2 dV
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.5\textheight,width=0.7\hsize,angle=0,keepaspectratio]{./Image/L3M1_graph2.png}
-\caption{Relaxation of total magnetic(purple line) and flow(green line) energy in $(l,m)=(3,1)$.} \label{L3M1_graph}
+\caption{Relaxation of total magnetic(red line) and flow(blue line) energy in $(l,m)=(3,1)$.} \label{L3M1_graph}
 \end{figure}
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.5\textheight,width=0.7\hsize,angle=0,keepaspectratio]{./Image/L3M2_graph2.png}
-\caption{Relaxation of total magnetic(purple line) and flow(green line) energy in $(l,m)=(3,2)$.} \label{L3M2_graph}
+\caption{Relaxation of total magnetic(red line) and flow(blue line) energy in $(l,m)=(3,2)$.} \label{L3M2_graph}
 \end{figure}
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.5\textheight,width=0.7\hsize,angle=0,keepaspectratio]{./Image/L3M3_graph2.png}
-\caption{Relaxation of total magnetic(perple line) and flow(green line) energy in $(l,m)=(3,3)$.} \label{L3M3_graph}
+\caption{Relaxation of total magnetic(red line) and flow(blue line) energy in $(l,m)=(3,3)$.} \label{L3M3_graph}
 \end{figure}
 
 
@@ -846,19 +850,28 @@ E_{mag} &=& \int_V \frac{1}{2} \bm b^2 dV
 これらのうち流れ場の構造の特徴が特に顕著だと思われる$(l,m)=(3,3)$を重点的に解析する。
 
 \subsection{$(l,m)=(3,3)$の緩和状態}
-以下に緩和時の磁場の経度成分$b_\phi$と半径成分$b_r$および速度場の半径成分$v_r$の球面分布（Fig.\ref{moll_vr}）と球面調和関数展開した係数${|c|}^2$のグラフ（Fig.\ref{ff_vr}）を示す。半径$r=0.9$とし、Fig.\ref{mol_vr}の可視化手法にはモルワイデ図法を用いた。
+以下に$(l,m)=(3,3)$の緩和時の磁場の経度成分$b_\phi$および速度場の半径成分$v_r$の球面分布（Fig.\ref{moll_vr}）と球面調和関数展開した係数${|c|}^2$のグラフ（Fig.\ref{ff_vr}）を示す。半径$r=0.9$とし、Fig.\ref{mol_vr}の可視化手法にはモルワイデ図法を用いた。
+
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.5\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/mollwide_bp_br_vr.png}
-\caption{Equatonal plane(top), and meridian plane(bottom) of stream tracer: relaxed magnetic field(left) and flow(right) in $(l,m)=(3,3)$.}\label{moll_vr}
-\end{figure}
-\begin{figure}[H]
-\centering
-\includegraphics[height=0.5\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/ff_bp_br_vr.png}
-\caption{Equatonal plane(top), and meridian plane(bottom) of stream tracer: relaxed magnetic field(left) and flow(right) in $(l,m)=(3,3)$.}\label{ff_vr}
+\includegraphics[height=0.5\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/vr_L3M3.png}
+\caption{Snapshots in logitude-latitude Mollwide Projection of relaxed longitude magnetic field $v_r$ (left) and coefficients of spherical harmonics for surface of sphere $r=0.9$ (right) in $(l,m)=(3,3)$.}\label{vr_L3M3}
 \end{figure}
 
-まず緩和後の流れ場の半径成分において、表面付近で$Y_2^0$の成分が強く、四重極状に緩和していることがわかる。また、
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.5\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/bp_L3M3.png}
+\caption{Snapshots in logitude-latitude Mollwide Projection of relaxed longitude magnetic field $b_\phi$ (left) and coefficients of spherical harmonics for surface of sphere $r=0.9$ (right) in $(l,m)=(3,3)$.}\label{bp_L3M3}
+\end{figure}
+%\begin{figure}[H]
+%\centering
+%\includegraphics[height=0.5\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/br_L3M3.png}
+%\caption{Equatonal plane(top), and meridian plane(bottom) of stream tracer: relaxed magnetic field(left) and flow(right) in $(l,m)=(3,3)$.}\label{br_L3M3}
+%\end{figure}
+
+Fig.\ref{vr_L3M3}より、緩和状態において表面付近の$v_r$の$Y_2^0$成分が強く、流れ場は四重極状に緩和していることがわかる。これは球の中心方向へ縮む初期磁力線に流体が凍りつき、両極から流れ出し、赤道付近でまた中心へ潜り込むという流れのサイクルが生まれたことを示唆している。
+
+また初期の$b_\phi$（Fig.\ref{b0p_L3M3}）と緩和前の$b_\phi$（Fig.\ref{bp_L3M3}）を比べてみると、初期の$b_\phi$は$Y_4^3$成分が卓越していたのに対し、緩和後では$Y_2^1$成分が強くなっている。これは$Y_4^3$よりも$Y_2^1$のほうが構造的に安定しているからであり、系が自発的に緩和した結果である。
 
 以下にFig.\ref{L3M3_relaxed}の赤道断面（Fig.\ref{clip_L3M3_xy}上）と子午断面（Fig.\ref{clip_L3M3_xy}下）を示す。
 \begin{figure}[H]
@@ -867,19 +880,17 @@ E_{mag} &=& \int_V \frac{1}{2} \bm b^2 dV
 \includegraphics[height=0.5\textheight,width=0.7\hsize,angle=0,keepaspectratio]{./Image/clip_L3M3_xz.png}
 \caption{Equatonal plane(top), and meridian plane(bottom) of stream tracer: relaxed magnetic field(left) and flow(right) in $(l,m)=(3,3)$.}\label{clip_L3M3_xy}
 \end{figure}
+この図より、上記に述べたように流体が６つの磁力線のリングの中心を通り、両極へ流れるというサイクルができていることがわかる。また磁力線は赤道付近で初期の６つの輪の構造を維持しつつ、中心から両極にかけては流れによって引き延ばされている。
 
-
-
-
-これより緩和状態の構造は以下のような模式図（Fig.\ref{L3M3_cartoon}）で表される。赤色は磁力線、青色は流れ場を表している。
+以上より緩和状態の構造は以下のような模式図（Fig.\ref{L3M3_cartoon}）で表される。赤色は磁力線、青色は流れ場を表している。
 
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.5\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/relaxedL3M3_cartoon.png}
+\includegraphics[height=0.5\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/relaxedL3M3_cartoon2.png}
 \caption{3D structure of relaxed magnetic field(red), and flow(blue) in $(l,m)=(3,3)$.}\label{L3M3_cartoon}
 \end{figure}
-\noindent
-この図より速度場の遷移が以下のようになることがわかる。
+
+まとめると速度場の遷移は以下のようになる。
 \begin{enumerate}
  % \renewcommand{\labelenumi}{(\arabic{enumi})}
 \item 磁力線のリングから中心に向かう流れが起きる。
