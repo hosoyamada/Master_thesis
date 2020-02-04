@@ -47,7 +47,7 @@
 \vspace{1cm}
 \section*{Abstract}
 % 英語要旨
-Relaxation, the system of transitions from a high energy state to a low state energy, is an interesting thing that is seen in various physical systems. It can be apply to a model of magnetohydrodynamics (MagnetoHydroDynamics, MHD). For MHD fluid, a relaxation theory called Taylor theory has been established, but Taylor theory assumes that only magnetic energy exists in the relaxed state and that the kinetic energy of the fluid can be ignored. This theory is not generally applicable to natural phenomena in MHD systems because there are relaxation states with flows. The ultimate goal of this study is to extend the classical Taylor theory and construct the MHD relaxation theory that describes the relaxation state with not only magnetic energy but also flow energy. In this study, I searched a behavior of MHD fluid in a spherical vessel by the computer simulation. The calculation model is as follows: the MHD fluid is filled in a sphere region, its radius is 1, and an initial magnetic field represented by a spherical harmonic is given. The boundary conditions were assumed to be a perfect conductor boundary (for the magnetic field), a rigid body boundary (for the flow field), and an adiabatic boundary (for the temperature field). A Yin--Yang--Zhong grid was used as a discretization method to solve the grid concentration problem, which is occurred in the global spherical simulation. I developed a Fortran preprocessor, efpp, for efficient coding in simulation. As a result of the simulation, the relaxation structure peculiar to the spherical harmonics was found.
+Relaxation, the system of transitions from a high energy state to a low, is an interesting thing that is seen in various physical systems. It can be apply to a model of magnetohydrodynamics (MagnetoHydro Dynamics, MHD). For MHD fluid, a relaxation theory called Taylor theory has been established, but this theory assumes that only magnetic energy exists in the relaxed state and the kinetic energy of fluid can be ignored. In generally, the relaxed state with flow is rather common, so the application range of Taylor theory is too narrow. The ultimate goal of this study is to extend the classical Taylor theory and construct the MHD relaxation theory that describes the relaxation state with not only magnetic energy but also flow. In this study, I searched a behavior of MHD fluid in a spherical vessel by the computer simulation. The calculation model is as follows: the MHD fluid is filled in a sphere region, its radius is 1, and an initial simple magnetic field is given. It is given no flow. When the simulation is started, it releases the energy of initial magnetic field and drives the flow. If the calculation is continued for a while, a relaxed state where the flow and the magnetic field coexist, is obtained. A Yin--Yang--Zhong grid was used as a discretization method to solve the grid concentration problem, which is occurred in the global spherical simulation. I developed a Fortran preprocessor, efpp, for efficient coding in simulation. As a result of the simulation, some interesting relaxation structure was found.
 
 
 % 日本語要旨
@@ -62,7 +62,7 @@ Relaxation, the system of transitions from a high energy state to a low state en
 \vspace{1cm}
 %=============================================
 \section*{要旨}
-エネルギーが高い状態から低い状態に系が自発的に遷移する現象、つまり緩和は様々な物理系で見られる興味深い現象である。それは磁気流体力学（MagnetoHydro Dynamics, MHD）のモデルにおいても例外ではない。MHD流体の緩和についてはTaylor理論と呼ばれる緩和理論が確立されているが、この理論では緩和状態において磁気エネルギーだけが存在し、流体の運動エネルギーは無視される。一般的なMHD系のエネルギー緩和現象では流れを持つ緩和状態の方がむしろ普通なので、Taylor理論の適用範囲は狭すぎる。本研究の最終的な目的は、古典的なTaylor理論を拡張し磁気エネルギーだけでなく流れのエネルギーを持つ緩和状態を説明するMHD緩和理論を構成することである。この目標を目指して、本研究では球状容器内のMHD流体の振る舞いについて計算機シミュレーションを行った。計算モデルは以下の通りである。半径1の球面に囲まれた球領域にMHD流体が満たされているとし、解析的に定義した単純な構造を持つ初期磁場を与える。初期の流れ場はないものとする。シミュレーションを開始すると初期磁場のエネルギーが解放され、流れが駆動される。そしてしばらく計算を続けると流れと磁場が共存する緩和状態が得られる。全球でシミュレーションを行う際に問題となる格子点集中問題を解決するための離散化手法としてYin--Yang--Zhong格子を用いた。またシミュレーションコード実装を効率的に行うためにFortranプリプロセッサを開発した。シミュレーションの結果、いくつかの興味深い緩和構造を見い出した。
+エネルギーが高い状態から低い状態に系が自発的に遷移する現象、つまり緩和は様々な物理系で見られる興味深い現象である。それは磁気流体力学（MagnetoHydro Dynamics, MHD）のモデルにおいても例外ではない。MHD流体の緩和についてはTaylor理論と呼ばれる緩和理論が確立されているが、この理論では緩和状態において磁気エネルギーだけが存在し、流体の運動エネルギーは無視される。一般的なMHD系のエネルギー緩和現象では流れを持つ緩和状態の方がむしろ普通なので、Taylor理論の適用範囲は狭すぎる。本研究の最終的な目的は、古典的なTaylor理論を拡張し磁気エネルギーだけでなく流れのエネルギーを持つ緩和状態を説明するMHD緩和理論を構成することである。この目標を目指して、本研究では球状容器内のMHD流体の振る舞いについて計算機シミュレーションを行った。計算モデルは以下の通りである。半径1の球面に囲まれた球領域にMHD流体が満たされているとし、解析的に定義した単純な構造を持つ初期磁場を与える。初期の流れ場はないものとする。シミュレーションを開始すると初期磁場のエネルギーが解放され、流れが駆動される。そしてしばらく計算を続けると流れと磁場が共存する緩和状態が得られる。全球でシミュレーションを行う際に問題となる格子点集中問題を解決するための離散化手法としてYin--Yang--Zhong格子を用いた。またシミュレーションコード実装を効率的に行うためにFortranプリプロセッサを開発した。シミュレーションの結果、いくつかの興味深い緩和構造を見出した。
 %=============================================
 
 
@@ -670,7 +670,7 @@ C \times r \times sin^2(\pi r) P_l^m (cos\theta)cos(m\phi) \\ 0 \\ 0
 \includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/spherical_harmonics3.png}
 \end{table}
 
-$C$は定数であり全ての$(l,m)$において$C=0.2$とした。また以下に初期状態の磁力線（Fig.\ref{initialMag1}）および半径$r=0.9$の経度方向の磁場$b_\phi$の球面分布(Fig.\ref{initialMag_moll})と球面調和関数展開した時の係数$|c|^2$のグラフ(Fig.\ref{initialMag_ff})をそれぞれ示す。球面分布の可視化手法にはモルワイデ図法を用いた。
+$C$は定数であり全ての$(l,m)$において$C=0.2$とした。以下に初期磁力線（Fig.\ref{initialMag1}）および半径$r=0.9$の経度方向の磁場$b_\phi$の球面分布(Fig.\ref{b0p_L3M1})と球面調和関数展開した時の係数$|c|^2$のグラフ(Fig.\ref{b0p_L3M2})をそれぞれ示す。球面分布の可視化手法にはモルワイデ図法を用いた。
 %それぞれ左から$(l,m)=(3,1)$、$(l,m)=(3,2)$、$(l,m)=(3,3)$の磁場を表している。
 \begin{figure}[H]
 \centering
@@ -683,19 +683,19 @@ $C$は定数であり全ての$(l,m)$において$C=0.2$とした。また以下
 \begin{figure}[H]
 \centering
 \includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/b0p_L3M1.png}
-\caption{Snapshots in logitude-latitude Mollwide Projection of initial longitude magnetic field $b_\phi$ (left) and coefficients of spherical harmonics for surface of sphere $r=0.9$ (right) in $(l,m)=(3,1)$.  } \label{b0p_L3M1}
+\caption{Snapshots in logitude-latitude Mollwide Projection of initial longitude magnetic field $b_\phi$ (left) and coefficients of spherical harmonics expansion to surface of sphere $r=0.9$ (right) in $(l,m)=(3,1)$.  } \label{b0p_L3M1}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/b0p_L3M2.png}
-\caption{Snapshots in logitude-latitude Mollwide Projection of initial longitude magnetic field $b_\phi$ (left) and coefficients of spherical harmonics for surface of sphere $r=0.9$ (right) in $(l,m)=(3,2)$.  } \label{b0p_L3M2}
+\caption{Snapshots in logitude-latitude Mollwide Projection of initial longitude magnetic field $b_\phi$ (left) and coefficients of spherical harmonics expansion to surface of sphere $r=0.9$ (right) in $(l,m)=(3,2)$.  } \label{b0p_L3M2}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=1.0\textheight,width=1.0\hsize,angle=0,keepaspectratio]{./Image/b0p_L3M3.png}
-\caption{Snapshots in logitude-latitude Mollwide Projection of initial longitude magnetic field $b_\phi$ (left) and coefficients of spherical harmonics for surface of sphere $r=0.9$ (right) in $(l,m)=(3,3)$.  }\label{b0p_L3M3}
+\caption{Snapshots in logitude-latitude Mollwide Projection of initial longitude magnetic field $b_\phi$ (left) and coefficients of spherical harmonics expansion to surface of sphere $r=0.9$ (right) in $(l,m)=(3,3)$.  }\label{b0p_L3M3}
 \end{figure}
 
 
@@ -850,7 +850,7 @@ E_{mag} &=& \int_V \frac{1}{2} \bm b^2 dV
 これらのうち流れ場の構造の特徴が特に顕著だと思われる$(l,m)=(3,3)$を重点的に解析する。
 
 \subsection{$(l,m)=(3,3)$の緩和状態}
-以下に$(l,m)=(3,3)$の緩和時の磁場の経度成分$b_\phi$および速度場の半径成分$v_r$の球面分布（Fig.\ref{moll_vr}）と球面調和関数展開した係数${|c|}^2$のグラフ（Fig.\ref{ff_vr}）を示す。半径$r=0.9$とし、Fig.\ref{mol_vr}の可視化手法にはモルワイデ図法を用いた。
+以下に$(l,m)=(3,3)$の緩和時の速度場半径成分$v_r$（Fig.\ref{vr_L3M3}）、および磁場経度成分$b_\phi$（Fig.\ref{bp_L3M3}）それぞれの球面分布とその球面で球面調和関数展開したときの係数${|c|}^2$のグラフを示す。半径$r=0.9$とし、球面分布の可視化手法にモルワイデ図法を用いた。
 
 \begin{figure}[H]
 \centering
